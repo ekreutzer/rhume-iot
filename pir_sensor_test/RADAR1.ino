@@ -17,7 +17,13 @@ void setup() {
 void loop(){
 //  delay(50);
   Serial.println(analogRead(inputPin));
-
+/**
+   * TODO: 
+   * implement logic to detect busyness
+   *      *poss: load all analogReads to a file/vector
+   *      *figure out deviation in analogReads and how much of a deviation indicates how much movement (idea is that more movement = more deviation in analogReads)
+   * can't get accurate readings on hand movement, need more testing
+   */
 
   
   val = digitalRead(inputPin);  // read input value
