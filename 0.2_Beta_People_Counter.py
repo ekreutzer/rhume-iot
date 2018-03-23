@@ -15,6 +15,7 @@
 #Imports
 import RPi.GPIO as GPIO         # Import GPIO library
 import time                     # Import 'time' library. Allows use of 'sleep'
+import requests                 # Import Post Requests
 
 #Constants
 FAR = 16                        # Pin for the Photoelectric sensor closer to the door
@@ -51,15 +52,23 @@ def loop():
     #Begin testing for change in rating
     #tempRating = counter/CAPACITY
     if (counter <= 4 and not(rating == 0)):
+        r = requests.post("https://rhume-service.herokuapp.com/Tasks/sensor", data={'rating':1, 'spaceID':19})
+        print(r.status_code, r.reason)
         print("Rating changed to Green (0)")
         rating = 0
     elif (counter > 4 and counter <= 8 and not(rating == 1)):
+        r = requests.post("https://rhume-service.herokuapp.com/Tasks/sensor", data={'rating':4, 'spaceID':19})
+        print(r.status_code, r.reason)
         print("Rating changed to Yellow (1)")
         rating = 1
     elif (counter > 8 and counter <= 12 and not(rating == 2)):
+        r = requests.post("https://rhume-service.herokuapp.com/Tasks/sensor", data={'rating':7, 'spaceID':19})
+        print(r.status_code, r.reason)
         print("Rating changed to Orange (2)")
         rating = 2
     elif (counter > 12 and not(rating == 3)):
+        r = requests.post("https://rhume-service.herokuapp.com/Tasks/sensor", data={'rating':10, 'spaceID':19})
+        print(r.status_code, r.reason)
         print("Rating changed to Red (3)")
         rating = 3
        
